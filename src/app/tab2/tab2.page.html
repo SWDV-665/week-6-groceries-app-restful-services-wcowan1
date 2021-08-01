@@ -1,4 +1,4 @@
-i<ion-header>
+<ion-header>
   <ion-toolbar>
     <ion-title>
       {{title}}
@@ -7,9 +7,13 @@ i<ion-header>
 </ion-header>
 
 <ion-content padding>
+  <h3 text-center *ngIf="loaditems().length === 0">
+    No Grocery Items Listed!   
+  </h3>
+
   <!-- List of Items -->
 <ion-list>
-  <ion-item-sliding *ngFor="let item of items; let i =index">
+  <ion-item-sliding *ngFor="let item of loaditems(); let i = index">
     <ion-item>
       <ion-label>{{item.name}}</ion-label>
       <p>{{item.quantity}}</p>
@@ -18,6 +22,15 @@ i<ion-header>
       <button (click)="removeitem(item,i)" ion-button color = "secondary" icon-start>
         <ion-icon name="trash"></ion-icon>
         DONE
+      </button>
+      <button (click)="shareitem(item,i)" ion-button color = "light" icon-start>
+        <ion-icon name="share"></ion-icon>
+        SHARE
+      </button>
+    
+      <button (click)="edititem(item,i)" ion-button color = "primary" icon-start>
+        <ion-icon name="create"></ion-icon>
+        EDIT
       </button>
     </ion-item-options>
   </ion-item-sliding>
